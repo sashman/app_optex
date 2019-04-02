@@ -21,6 +21,6 @@ be found at [https://hexdocs.pm/app_optex](https://hexdocs.pm/app_optex).
 
 Uses the `APPOPTICS_TOKEN` environment variable.
 
-```
+```elixir
 AppOptex.measurement("my.test.metric", 42)
 ```
