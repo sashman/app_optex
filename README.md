@@ -1,5 +1,7 @@
 # AppOptex
 
+Client for [AppOptics API](https://docs.appoptics.com/api/)
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
