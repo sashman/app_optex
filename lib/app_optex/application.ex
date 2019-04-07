@@ -8,7 +8,7 @@ defmodule AppOptex.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      {AppOptex.AppOptexWorker, read_token()}
+      {AppOptex.Worker, read_token()}
       # Starts a worker by calling: AppOptex.Worker.start_link(arg)
       # {AppOptex.Worker, arg}
     ]

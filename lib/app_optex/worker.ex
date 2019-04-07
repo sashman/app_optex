@@ -1,5 +1,7 @@
-defmodule AppOptex.AppOptexWorker do
+defmodule AppOptex.Worker do
   use GenServer
+  require Logger
+  alias AppOptex.Client
 
   def start_link(init_args) do
     # you may want to register your server with `name: __MODULE__`
@@ -19,17 +21,18 @@ defmodule AppOptex.AppOptexWorker do
           token: token,
           appoptics_url: appoptics_url
         } = state
-      )
-      when is_list(measurements) and is_map(tags) do
-    payload = %{
-      tags: tags,
-      measurements: measurements
-    }
-
-    HTTPoison.post(appoptics_url, Poison.encode!(payload), [{"Content-Type", "application/json"}],
-      hackney: [basic_auth: {token, ""}]
-    )
+      ) do
+    Client.send_measurements(appoptics_url, token, measurements, tags)
+    |> log_response()
 
     {:noreply, state}
   end
+
+  defp log_response({:ok, %HTTPoison.Response{body: body, status_code: 202}}),
+    do: Logger.debug("AppOptex #{body}")
+
+  defp log_response({_, %HTTPoison.Response{body: body, status_code: status_code}}),
+    do: Logger.error("#{body} #{status_code}")
+
+  defp log_response(_), do: Logger.error("Unable to send metrics")
 end
