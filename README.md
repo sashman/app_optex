@@ -1,5 +1,7 @@
 # AppOptex
 
+![CircleCI](https://img.shields.io/circleci/project/github/sashman/app_optex.svg)
+
 Client for [AppOptics API](https://docs.appoptics.com/api/)
 
 ## Installation
