@@ -21,4 +21,20 @@ defmodule AppOptex do
   def measurement(name, value, tags) do
     GenServer.cast(Worker, {:measurements, [%{name: name, value: value}], tags})
   end
+
+  @doc """
+  Send multiple measurements with tags. The measurements are sent to AppOptics asynchronously.
+
+  * measurements - a batch of metrics to send as a list of maps.
+  * tags - A map of tags to send with the measurement. Cannot be empty.
+
+  ## Examples
+
+      iex> AppOptex.measurements([%{name: "my.mertic", value: 1}, %{name: "my.other_mertic", value: 5}], %{my_tag: "value"})
+      :ok
+
+  """
+  def measurements(measurements, tags) do
+    GenServer.cast(Worker, {:measurements, measurements, tags})
+  end
 end
