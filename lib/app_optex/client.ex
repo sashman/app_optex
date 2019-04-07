@@ -90,7 +90,6 @@ defmodule AppOptex.Client do
       [{"Content-Type", "application/json"}],
       hackney: [basic_auth: {token, ""}]
     ).body
-    |> Logger.debug()
     |> Poison.decode!()
   end
 end
