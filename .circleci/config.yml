@@ -1,0 +1,13 @@
+version: 2.0
+jobs:
+  build:
+	docker:
+  	- image: circleci/elixir:1.8
+	working_directory: ~/app_optex
+	steps:
+  	- type: checkout
+  	- run: mix local.rebar --force
+  	- run: mix local.hex --force
+  	- run: mix deps.get
+  	- run: mix test
+ 
