@@ -1,4 +1,6 @@
 defmodule AppOptex.Client do
+  require Logger
+
   @doc """
 
   Send an HTTP request to [AppOptics create API](https://docs.appoptics.com/api/?shell#create-a-measurement) with a list of measurements and tags. Returns the response from AppOptics API.
@@ -88,6 +90,7 @@ defmodule AppOptex.Client do
       [{"Content-Type", "application/json"}],
       hackney: [basic_auth: {token, ""}]
     ).body
+    |> Logger.debug()
     |> Poison.decode!()
   end
 end

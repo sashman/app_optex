@@ -1,5 +1,5 @@
 defmodule AppOptex do
-  alias AppOptex.Worker
+  alias AppOptex.{Worker, Client}
 
   @moduledoc """
   Client library for sending and reading AppOptics API measurements. To auth AppOptics make sure to set the `APPOPTICS_TOKEN` environment variable. This can also be overridden in the Application config. 
@@ -36,5 +36,18 @@ defmodule AppOptex do
   """
   def measurements(measurements, tags) do
     GenServer.cast(Worker, {:measurements, measurements, tags})
+  end
+
+  def read_measurements(metric_name, resolution, params) do
+    appoptics_url = Application.get_env(:app_optex, :appoptics_url)
+
+    token =
+      Application.get_env(:app_optex, :appoptics_token)
+      |> case do
+        {:system, env_var} -> System.get_env(env_var)
+        token -> token
+      end
+
+    Client.read_measurements(appoptics_url, token, metric_name, resolution, params)
   end
 end
