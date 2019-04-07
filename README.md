@@ -25,6 +25,16 @@ be found at [https://hexdocs.pm/app_optex](https://hexdocs.pm/app_optex).
 
 Uses the `APPOPTICS_TOKEN` environment variable.
 
+### Send a single measurement
+
 ```elixir
-AppOptex.measurement("my.test.metric", 42)
+  iex> AppOptex.measurement("my.mertic", 10, %{my_tag: "value"})
+  :ok
+```
+
+### Send multiple measurements
+
+```elixir
+  iex> AppOptex.measurements([%{name: "my.mertic", value: 1}, %{name: "my.other_mertic", value: 5}], %{my_tag: "value"})
+  :ok
 ```
