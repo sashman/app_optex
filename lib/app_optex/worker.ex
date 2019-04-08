@@ -3,6 +3,10 @@ defmodule AppOptex.Worker do
   require Logger
   alias AppOptex.Client
 
+  @moduledoc """
+    GenServer implementation used for asynchronous communication
+  """
+
   def start_link(init_args) do
     # you may want to register your server with `name: __MODULE__`
     # as a third argument to `start_link`

@@ -1,6 +1,10 @@
 defmodule AppOptex.Client do
   require Logger
 
+  @moduledoc """
+    Module responsible for comunication with AppOptics API.
+  """
+
   @doc """
 
   Send an HTTP request to [AppOptics create API](https://docs.appoptics.com/api/?shell#create-a-measurement) with a list of measurements and tags. Returns the response from AppOptics API.
@@ -32,14 +36,14 @@ defmodule AppOptex.Client do
 
   Read from [AppOptics retrieve measurement API](https://docs.appoptics.com/api/?shell#retrieve-a-measurement) given a query. Returns the AppOptex API response.
 
-  * appoptics_url - AppOptics API endpoint.
-  * token - AppOptics auth token.
-  * metric_name - Name of the metric to search.
-  * resolution - Defines the resolution to return the data to in seconds.
-  * query - map of query params. **Must** include either `duration` or `start_time`. Params include:
-    * start_time - Unix Time of where to start the time search from. This parameter is optional if duration is specified.
-    * end_time - Unix Time of where to end the search. This parameter is optional and defaults to current wall time.
-    * duration - How far back to look in time, measured in seconds. This parameter can be used in combination with endtime to set a starttime N seconds back in time. It is an error to set starttime, endtime and duration.
+  * `appoptics_url` - AppOptics API endpoint.
+  * `token` - AppOptics auth token.
+  * `metric_name` - Name of the metric to search.
+  * `resolution` - Defines the resolution to return the data to in seconds.
+  * `query` - map of query params. **Must** include either `duration` or `start_time`. Params include:
+  * `start_time` - Unix Time of where to start the time search from. This parameter is optional if duration is specified.
+  * `end_time` - Unix Time of where to end the search. This parameter is optional and defaults to current wall time.
+  * `duration` - How far back to look in time, measured in seconds. This parameter can be used in combination with endtime to set a starttime N seconds back in time. It is an error to set starttime, endtime and duration.
 
   ## Examples
 
