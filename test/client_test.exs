@@ -39,7 +39,10 @@ defmodule AppOptex.ClientTest do
       end_time: 1_554_676_999
     }
 
-    response = %{body: Poison.encode!(%{response: "from AppOptics"})}
+    response = %HTTPoison.Response{
+      body: Poison.encode!(%{response: "from AppOptics"}),
+      status_code: 200
+    }
 
     with_mock HTTPoison,
       get!: fn "url/my.metric" <> _,

@@ -89,7 +89,13 @@ defmodule AppOptex.Client do
       "#{appoptics_url}/#{mertic_name}?#{query}",
       [{"Content-Type", "application/json"}],
       hackney: [basic_auth: {token, ""}]
-    ).body
-    |> Poison.decode!()
+    )
+    |> extract_body()
   end
+
+  def extract_body(%HTTPoison.Response{body: body, status_code: 200}),
+    do: body |> Poison.decode!()
+
+  def extract_body(%HTTPoison.Response{body: body}), do: body
+  def extract_body(_), do: "Unable to extract body"
 end
