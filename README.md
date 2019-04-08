@@ -39,7 +39,7 @@ Uses the `APPOPTICS_TOKEN` environment variable.
   :ok
 ```
 
-### read metrics
+### Read metrics
 
 ```elixir
   iex> AppOptex.read_measurements("my.mertic", 60, %{duration: 86400})
