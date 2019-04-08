@@ -93,9 +93,9 @@ defmodule AppOptex.Client do
     |> extract_body()
   end
 
-  def extract_body(%HTTPoison.Response{body: body, status_code: 200}),
+  defp extract_body(%HTTPoison.Response{body: body, status_code: 200}),
     do: body |> Poison.decode!()
 
-  def extract_body(%HTTPoison.Response{body: body}), do: body
-  def extract_body(_), do: "Unable to extract body"
+  defp extract_body(%HTTPoison.Response{body: body}), do: body
+  defp extract_body(_), do: "Unable to extract body"
 end
