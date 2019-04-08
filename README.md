@@ -43,4 +43,16 @@ Uses the `APPOPTICS_TOKEN` environment variable.
 
 ```elixir
   iex> AppOptex.read_measurements("my.mertic", 60, %{duration: 86400})
+  %{
+    "attributes" => %{"created_by_ua" => "hackney/1.15.1"},
+    "links" => [],
+    "name" => "my.mertic",
+    "resolution" => 60,
+    "series" => [
+      %{
+        "measurements" => [%{"time" => 1554720060, "value" => 10.0}],
+        "tags" => %{"my_tag" => "value"}
+      }
+    ]
+  }
 ```
