@@ -38,3 +38,9 @@ Uses the `APPOPTICS_TOKEN` environment variable.
   iex> AppOptex.measurements([%{name: "my.mertic", value: 1}, %{name: "my.other_mertic", value: 5}], %{my_tag: "value"})
   :ok
 ```
+
+### read metrics
+
+```elixir
+  iex> AppOptex.read_measurements("my.mertic", 60, %{duration: 86400})
+```
