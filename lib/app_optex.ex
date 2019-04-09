@@ -38,7 +38,6 @@ defmodule AppOptex do
     GenServer.cast(Worker, {:measurements, measurements, tags})
   end
 
-
   @doc """
   Recieve multiple measurements with tags. The measurements are read from AppOptics synchronously.
 
@@ -76,4 +75,10 @@ defmodule AppOptex do
 
     Client.read_measurements(appoptics_url, token, metric_name, resolution, params)
   end
+
+  def put_global_tags(tags) when is_map(tags),
+    do: GenServer.cast(Worker, {:put_global_tags, tags})
+
+  def get_global_tags(),
+    do: GenServer.call(Worker, {:get_global_tags})
 end
