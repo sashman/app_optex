@@ -91,14 +91,12 @@ defmodule AppOptex do
     do: GenServer.cast(Worker, {:put_global_tags, tags})
 
   @doc """
-  Set the global tags that will be applied to all measurements. These can be overriden by tags provided in measurement/3 and measurements/2.
-
-  * `tags` - maps of tags to set.
+  Get the global tags that will be applied to all measurements.
 
   ## Examples
 
-      iex> AppOptex.put_global_tags(%{my_tag: "value"})
-      :ok
+      iex> AppOptex.get_global_tags()
+      %{my_tag: "value"}
 
   """
   def get_global_tags(),
