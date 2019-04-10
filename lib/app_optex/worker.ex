@@ -23,10 +23,11 @@ defmodule AppOptex.Worker do
         {:measurements, measurements, tags},
         %{
           token: token,
-          appoptics_url: appoptics_url
+          appoptics_url: appoptics_url,
+          global_tags: global_tags
         } = state
       ) do
-    Client.send_measurements(appoptics_url, token, measurements, tags)
+    Client.send_measurements(appoptics_url, token, measurements, global_tags |> Map.merge(tags))
     |> log_response()
 
     {:noreply, state}
