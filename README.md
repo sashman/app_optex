@@ -30,6 +30,8 @@ Uses the `APPOPTICS_TOKEN` environment variable.
 ```elixir
   iex> AppOptex.measurement("my.mertic", 10, %{my_tag: "value"})
   :ok
+  iex> AppOptex.measurement(%{name: "my.mertic", value: 10}, %{my_tag: "value"})
+  :ok
 ```
 
 ### Send multiple measurements
