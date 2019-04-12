@@ -56,3 +56,19 @@ Uses the `APPOPTICS_TOKEN` environment variable.
     ]
   }
 ```
+
+### Set global tags
+
+These tags will be applied to every metric
+
+```elixir
+  iex> AppOptex.put_global_tags(%{my: "tag"})
+  :ok
+```
+
+### Read global tag
+
+```elixir
+  iex> AppOptex.get_global_tags()
+  %{my: "tag"}
+```
