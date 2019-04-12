@@ -22,6 +22,26 @@ defmodule AppOptex do
     GenServer.cast(Worker, {:measurements, [%{name: name, value: value}], tags})
   end
 
+  @moduledoc """
+  Client library for sending and reading AppOptics API measurements. To auth AppOptics make sure to set the `APPOPTICS_TOKEN` environment variable. This can also be overridden in the Application config.
+  """
+
+  @doc """
+  Send one measurement with tags. The measurements are sent to AppOptics asynchronously.
+
+  * `measurement` - Map of the measurement data
+  * `tags` - A map of tags to send with the measurement. Cannot be empty.
+
+  ## Examples
+
+      iex> AppOptex.measurement(%{name: "my.mertic", value: 10}, %{my_tag: "value"})
+      :ok
+
+  """
+  def measurement(measurement = %{name: _, value: _}, tags) when is_map(measurement) do
+    GenServer.cast(Worker, {:measurements, [measurement], tags})
+  end
+
   @doc """
   Send multiple measurements with tags. The measurements are sent to AppOptics asynchronously.
 
