@@ -66,7 +66,7 @@ These tags will be applied to every metric
   :ok
 ```
 
-### Read global tag
+### Read global tags
 
 ```elixir
   iex> AppOptex.get_global_tags()
