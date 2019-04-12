@@ -101,4 +101,10 @@ defmodule AppOptex do
   """
   def get_global_tags(),
     do: GenServer.call(Worker, {:get_global_tags})
+
+  def push_to_queue(measurements, tags),
+    do: GenServer.cast(Worker, {:push_to_queue, measurements, tags})
+
+  def read_queue(),
+    do: GenServer.call(Worker, {:read_queue})
 end
