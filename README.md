@@ -59,7 +59,7 @@ Uses the `APPOPTICS_TOKEN` environment variable.
 
 ### Set global tags
 
-These tags will be applied to every metric
+These tags will be applied to every sent measurement.
 
 ```elixir
   iex> AppOptex.put_global_tags(%{my: "tag"})
