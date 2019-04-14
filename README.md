@@ -74,3 +74,16 @@ These tags will be applied to every sent measurement.
   iex> AppOptex.get_global_tags()
   %{my: "tag"}
 ```
+
+### Send using a queue
+
+```elixir
+  iex> AppOptex.push_to_queue([%{name: "my.metric.1", value: 1}], %{test: true})
+  :ok
+  iex> AppOptex.push_to_queue([%{name: "my.metric.2", value: 1}], %{test: true})
+  :ok
+  iex> AppOptex.push_to_queue([%{name: "my.metric.3", value: 1}], %{test: true})
+  :ok
+  iex> AppOptex.flush_queue()
+  :ok
+```

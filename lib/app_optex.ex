@@ -122,12 +122,39 @@ defmodule AppOptex do
   def get_global_tags(),
     do: GenServer.call(Worker, {:get_global_tags})
 
+  @doc """
+  Asynchronously add to queue of measurements to be sent to AppOptics later.
+
+  ## Examples
+
+      iex> AppOptex.push_to_queue([%{name: "my.metric", value: 1}], %{test: true})
+      :ok
+
+  """
   def push_to_queue(measurements, tags),
     do: GenServer.cast(Worker, {:push_to_queue, measurements, tags})
 
+  @doc """
+  Return the current contents of the measurements queue. The queue format is a list of tuples, each tuple contains a measurements list and a tags map.
+
+  ## Examples
+
+      iex> AppOptex.read_queue
+      [{[%{name: "my.metric", value: 1}], %{test: true}}]
+
+  """
   def read_queue(),
     do: GenServer.call(Worker, {:read_queue})
 
+  @doc """
+  Asynchronously send the contents of the queue to AppOptics and clear it.
+
+  ## Examples
+
+      iex> AppOptex.flush_queue()
+      :ok
+
+  """
   def flush_queue(),
     do: GenServer.cast(Worker, {:flush_queue})
 end
