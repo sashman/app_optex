@@ -1,7 +1,7 @@
 defmodule AppOptex.Worker do
   use GenServer
   require Logger
-  alias AppOptex.Client
+  alias AppOptex.{Client, Queue}
 
   @moduledoc """
     GenServer implementation used for asynchronous communication
@@ -49,25 +49,13 @@ defmodule AppOptex.Worker do
         %{token: token, appoptics_url: appoptics_url, global_tags: global_tags, queue: queue} =
           state
       ) do
-    {measurements_batch, tags_batch} = batch_queue(queue)
-    Logger.debug(measurements_batch |> inspect)
+    {measurements, tags} = Queue.batch_queue(queue)
+    Logger.debug(measurements |> inspect)
 
-    Client.send_measurements(
-      appoptics_url,
-      token,
-      measurements_batch,
-      global_tags |> Map.merge(tags_batch)
-    )
+    Client.send_measurements(appoptics_url, token, measurements, global_tags |> Map.merge(tags))
     |> log_response()
 
     {:noreply, %{state | queue: []}}
-  end
-
-  defp batch_queue(queue) do
-    queue
-    |> Enum.reduce({[], %{}}, fn {measurements, tags}, {acc_measurements, acc_tags} ->
-      {acc_measurements ++ measurements, Map.merge(acc_tags, tags)}
-    end)
   end
 
   defp log_response({:ok, %HTTPoison.Response{body: body, status_code: 202}}),
