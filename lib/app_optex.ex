@@ -127,4 +127,7 @@ defmodule AppOptex do
 
   def read_queue(),
     do: GenServer.call(Worker, {:read_queue})
+
+  def flush_queue(),
+    do: GenServer.cast(Worker, {:flush_queue})
 end
