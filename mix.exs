@@ -11,7 +11,7 @@ defmodule AppOptex.MixProject do
       package: package(),
       deps: deps(),
       name: "AppOptex",
-      source_url: "https://github.com/elixir-ecto/postgrex"
+      source_url: "https://github.com/sashman/app_optex",
       deps: deps()
     ]
   end
