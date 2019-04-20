@@ -7,7 +7,7 @@ Client for [AppOptics API](https://docs.appoptics.com/api/)
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+The package can be installed
 by adding `app_optex` to your list of dependencies in `mix.exs`:
 
 ```elixir
