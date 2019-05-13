@@ -14,7 +14,7 @@ defmodule AppOptex do
 
   ## Examples
 
-      iex> AppOptex.measurement("my.mertic", 10, %{my_tag: "value"})
+      iex> AppOptex.measurement("my.metric", 10, %{my_tag: "value"})
       :ok
 
   """
@@ -34,7 +34,7 @@ defmodule AppOptex do
 
   ## Examples
 
-      iex> AppOptex.measurement(%{name: "my.mertic", value: 10}, %{my_tag: "value"})
+      iex> AppOptex.measurement(%{name: "my.metric", value: 10}, %{my_tag: "value"})
       :ok
 
   """
@@ -50,7 +50,7 @@ defmodule AppOptex do
 
   ## Examples
 
-      iex> AppOptex.measurements([%{name: "my.mertic", value: 1}, %{name: "my.other_mertic", value: 5}], %{my_tag: "value"})
+      iex> AppOptex.measurements([%{name: "my.metric", value: 1}, %{name: "my.other_metric", value: 5}], %{my_tag: "value"})
       :ok
 
   """
@@ -69,11 +69,11 @@ defmodule AppOptex do
     - `duration` - How far back to look in time, measured in seconds. This parameter can be used in combination with endtime to set a starttime N seconds back in time. It is an error to set starttime, endtime and duration.
 
   ## Examples
-      iex> AppOptex.client.read_measurements("my.other_mertic", 60, %{duration: 999999})
+      iex> AppOptex.client.read_measurements("my.other_metric", 60, %{duration: 999999})
       %{
         "attributes" => %{"created_by_ua" => "hackney/1.15.1"},
         "links" => [],
-        "name" => "my.other_mertic",
+        "name" => "my.other_metric",
         "resolution" => 60,
         "series" => [
           %{

@@ -47,11 +47,11 @@ defmodule AppOptex.Client do
 
   ## Examples
 
-      iex> AppOptex.Client.read_measurements("https://api.appoptics.com/v1/measurements", "MY_TOKEN", "my.other_mertic", 60, %{duration: 999999})
+      iex> AppOptex.Client.read_measurements("https://api.appoptics.com/v1/measurements", "MY_TOKEN", "my.other_metric", 60, %{duration: 999999})
       %{
             "attributes" => %{"created_by_ua" => "hackney/1.15.1"},
             "links" => [],
-            "name" => "my.other_mertic",
+            "name" => "my.other_metric",
             "resolution" => 60,
             "series" => [
                 %{
@@ -63,25 +63,25 @@ defmodule AppOptex.Client do
 
   """
 
-  def read_measurements(appoptics_url, token, mertic_name, resolution, %{start_time: _} = params),
-    do: _read_measurements(appoptics_url, token, mertic_name, resolution, params)
+  def read_measurements(appoptics_url, token, metric_name, resolution, %{start_time: _} = params),
+    do: _read_measurements(appoptics_url, token, metric_name, resolution, params)
 
-  def read_measurements(appoptics_url, token, mertic_name, resolution, %{duration: _} = params),
-    do: _read_measurements(appoptics_url, token, mertic_name, resolution, params)
+  def read_measurements(appoptics_url, token, metric_name, resolution, %{duration: _} = params),
+    do: _read_measurements(appoptics_url, token, metric_name, resolution, params)
 
   def read_measurements(
         appoptics_url,
         token,
-        mertic_name,
+        metric_name,
         resolution,
         %{duration: _, start_time: _} = params
       ),
-      do: _read_measurements(appoptics_url, token, mertic_name, resolution, params)
+      do: _read_measurements(appoptics_url, token, metric_name, resolution, params)
 
-  def read_measurements(_appoptics_url, _token, _mertic_name, _resolution, _),
+  def read_measurements(_appoptics_url, _token, _metric_name, _resolution, _),
     do: raise("Must provide either :duration or :start_time")
 
-  def _read_measurements(appoptics_url, token, mertic_name, resolution, params)
+  def _read_measurements(appoptics_url, token, metric_name, resolution, params)
       when is_map(params) do
     query =
       params
@@ -90,7 +90,7 @@ defmodule AppOptex.Client do
       |> Enum.join("&")
 
     HTTPoison.get!(
-      "#{appoptics_url}/#{mertic_name}?#{query}",
+      "#{appoptics_url}/#{metric_name}?#{query}",
       [{"Content-Type", "application/json"}],
       hackney: [basic_auth: {token, ""}]
     )
