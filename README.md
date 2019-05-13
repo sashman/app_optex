@@ -27,27 +27,27 @@ Uses the `APPOPTICS_TOKEN` environment variable.
 ### Send a single measurement
 
 ```elixir
-  iex> AppOptex.measurement("my.mertic", 10, %{my_tag: "value"})
+  iex> AppOptex.measurement("my.metric", 10, %{my_tag: "value"})
   :ok
-  iex> AppOptex.measurement(%{name: "my.mertic", value: 10}, %{my_tag: "value"})
+  iex> AppOptex.measurement(%{name: "my.metric", value: 10}, %{my_tag: "value"})
   :ok
 ```
 
 ### Send multiple measurements
 
 ```elixir
-  iex> AppOptex.measurements([%{name: "my.mertic", value: 1}, %{name: "my.other_mertic", value: 5}], %{my_tag: "value"})
+  iex> AppOptex.measurements([%{name: "my.metric", value: 1}, %{name: "my.other_metric", value: 5}], %{my_tag: "value"})
   :ok
 ```
 
 ### Read metrics
 
 ```elixir
-  iex> AppOptex.read_measurements("my.mertic", 60, %{duration: 86400})
+  iex> AppOptex.read_measurements("my.metric", 60, %{duration: 86400})
   %{
     "attributes" => %{"created_by_ua" => "hackney/1.15.1"},
     "links" => [],
-    "name" => "my.mertic",
+    "name" => "my.metric",
     "resolution" => 60,
     "series" => [
       %{
