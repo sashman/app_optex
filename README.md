@@ -3,7 +3,7 @@
 ![CircleCI](https://img.shields.io/circleci/project/github/sashman/app_optex.svg)
 ![Hex.pm](https://img.shields.io/hexpm/v/app_optex.svg)
 
-Client for [AppOptics API](https://docs.appoptics.com/api/)
+Client for [AppOptics API](https://docs.appoptics.com/api/), as listed on [AppOptics community created language bindings](https://docs.appoptics.com/kb/custom_metrics/api/#community-created-language-bindings)
 
 ## Installation
 
